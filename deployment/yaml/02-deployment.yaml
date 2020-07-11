@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: classic-order
+  namespace: classic-sample-ns
+  labels:
+    app: classic-sample-application
+    subname: order
+spec:
+  selector:
+    matchLabels:
+      app: classic-sample-application
+      subname: order
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: classic-sample-application
+        subname: order
+    spec:
+      containers:
+        - name: container-order
+          image: "gandhicloudlab/classic-order:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: my-http
+              containerPort: 9030
